@@ -1,7 +1,5 @@
-import { Mic, ShoppingBag, Sparkles } from "lucide-react";
+import Hero from "@/components/Hero/Hero";
 
-export default function Home() {
-  return (
-    <></>
-  );
+export default function HomePage() {
+  return <Hero />;
 }
