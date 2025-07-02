@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useUser } from '@clerk/nextjs';
 import { ShoppingCart, User } from 'lucide-react';
 import NavLink from './NavLink';
 import navLinks from './navLinks';
@@ -11,19 +12,19 @@ interface Props {
   closeMenu: () => void;
 }
 
-const MobileNav = ({ isOpen, closeMenu }: Props) => (
+const MobileNav = ({ isOpen, closeMenu }: Props) => {
+  const { isSignedIn } = useUser();
+  return (
   <div
-    className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-      isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-    }`}
+    className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+      }`}
   >
     <div className="px-4 pt-2 pb-6 space-y-2 bg-white/95 backdrop-blur-md border-t border-gray-100">
       {navLinks.map((link, index) => (
         <div
           key={link.href}
-          className={`transform transition-all duration-300 ${
-            isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
-          }`}
+          className={`transform transition-all duration-300 ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+            }`}
           style={{ transitionDelay: `${index * 50}ms` }}
         >
           <NavLink
@@ -44,7 +45,7 @@ const MobileNav = ({ isOpen, closeMenu }: Props) => (
             onClick={closeMenu}
           >
             <User className="w-5 h-5" />
-            <span>Login</span>
+            <span>{isSignedIn ? "Logout" : "Login"}</span>
           </Link>
 
           <Link
@@ -62,6 +63,6 @@ const MobileNav = ({ isOpen, closeMenu }: Props) => (
       </div>
     </div>
   </div>
-);
-
+  );
+}
 export default MobileNav;

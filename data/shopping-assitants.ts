@@ -1,5 +1,3 @@
-// data/shopping-assistants.ts
-
 import { ShoppingAssistant } from "@/types/shopping-assitants";
 
 export const shoppingAssistants: ShoppingAssistant[] = [
