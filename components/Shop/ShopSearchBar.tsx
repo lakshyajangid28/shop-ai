@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Search } from "lucide-react";
 
-const ShopSearchBar = ({ query, setQuery, searchProducts }: any) => {
+const ShopSearchBar = ({ setQuery, searchProducts }: any) => {
   const inputRef = useRef(null);
 
   const handleSearch = (e: React.FormEvent) => {

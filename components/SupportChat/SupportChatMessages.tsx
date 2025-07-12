@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { User, Clock, Loader2 } from "lucide-react";
-const serenityAvatar = "/images/sparkle-avatar.jpg";
+const sparkleAvatar = "/images/sparkle-avatar.jpg";
 
 const SupportChatMessages = ({ messages }: { messages: any[] }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -16,7 +16,7 @@ const SupportChatMessages = ({ messages }: { messages: any[] }) => {
           <div className={`max-w-[80%] ${message.type === "user" ? "order-2" : "order-1"}`}>
             {message.type === "support" && (
               <div className="flex items-center space-x-2 mb-2">
-                <img src={serenityAvatar} alt="Serenity AI" className="w-8 h-8 rounded-full border-2 border-purple-300 shadow" />
+                <img src={sparkleAvatar} alt="Serenity AI" className="w-8 h-8 rounded-full border-2 border-purple-300 shadow" />
                 <span className="text-sm font-semibold text-purple-700">Support Assistant</span>
               </div>
             )}

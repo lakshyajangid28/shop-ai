@@ -18,16 +18,40 @@ const ShopPage = () => {
     setLoading(true);
 
     // Simulate an API call to fetch products based on the query
+    const productBasedOnQuery = async () => {
+      try {
+        const res = await fetch(`${backend_url}/products?query=${query}`);
+        if (!res.ok) throw new Error("Failed to fetch products");
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setProducts([]);
+      }
+    }
+    productBasedOnQuery();
 
-
-    setTimeout(() => setLoading(false), 1000);
+    setLoading(false);
   }
 
   useEffect(() => {
-    if (shoppingList.length > 0) {
+    if (shoppingList.length > 0 && products.length === 0 && query === "") {
       setLoading(true);
+      console.log("Fetching products based on shopping list...");
 
       // Simulate fetching products based on the shopping list
+      const fetchProductsBasedOnShoppingList = async () => {
+        try {
+          const res = await fetch(`${backend_url}/products?shoppingList=${JSON.stringify(shoppingList)}`);
+          if (!res.ok) throw new Error("Failed to fetch products");
+          const data = await res.json();
+          setProducts(data);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+          setProducts([]);
+        }
+      };
+      fetchProductsBasedOnShoppingList(); 
 
       setLoading(false);
     }
@@ -35,7 +59,6 @@ const ShopPage = () => {
 
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
-      console.log("User is signed in:", user);
       const fetchShoppingList = async () => {
         try {
           const res = await fetch(`/api/cart?userId=${user.id}`);
@@ -54,7 +77,7 @@ const ShopPage = () => {
   return (
     <div className="flex flex-col items-center pt-8">
       <ShopHeader />
-      <ShopSearchBar query={query} setQuery={setQuery} searchProducts={searchProducts} />
+      <ShopSearchBar setQuery={setQuery} searchProducts={searchProducts} />
       <div className="w-full max-w-5xl mx-auto mt-8">
         <ProductRecommendations
           isSignedIn={isSignedIn}

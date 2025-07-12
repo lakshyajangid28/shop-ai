@@ -3,11 +3,8 @@ export interface ShoppingAssistant {
   name: string;
   title: string;
   category: string;
-  rating: number;
-  reviewCount: number;
   description: string;
   expertise: string[];
-  voiceStyle: string;
   avatar: string;
 }
 

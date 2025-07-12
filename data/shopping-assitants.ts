@@ -6,24 +6,18 @@ export const shoppingAssistants: ShoppingAssistant[] = [
     name: 'Serenity',
     title: 'Shopping Assistant',
     category: 'Shopping',
-    rating: 4.9,
-    reviewCount: 234,
     description: 'I help you find the perfect products and deals for your needs with elegance and attention to every detail.',
     expertise: ['Product search', 'shopping advice', 'recommendations'],
-    voiceStyle: 'Warm, calming, professional',
     avatar: '/images/serenity-avatar.jpg'
   },
   {
-    id: 'executive',
-    name: 'Executive',
+    id: 'sparkle',
+    name: 'Sparkle',
     title: 'Customer Support Assistant',
     category: 'Support',
-    rating: 4.9,
-    reviewCount: 156,
     description: 'I help you with your orders, returns, and any customer support needs you have.',
-    expertise: ['Order help', 'returns', 'customer support'],
-    voiceStyle: 'Authoritative, clear, confident',
-    avatar: '/images/executive-avatar.jpg'
+    expertise: ['Order help', 'customer support'],
+    avatar: '/images/sparkle-avatar.jpg'
   }
 ];
 
