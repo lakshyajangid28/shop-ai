@@ -16,9 +16,7 @@ const NavLink = ({ href, children, className = '', onClick }: NavLinkProps) => {
   return (
     <Link
       href={href}
-      className={`relative group px-3 cursor-pointer py-2 transition-all duration-300 ease-in-out 
-        ${isActive ? 'text-blue-700 font-bold' : 'text-gray-700 hover:text-purple-600'} 
-        ${className}`.trim()}
+      className={`relative group px-3 cursor-pointer py-2 transition-all duration-300 ease-in-out font-bold text-blue-700 hover:text-purple-600 ${className}`.trim()}
       onClick={onClick}
     >
       {children}

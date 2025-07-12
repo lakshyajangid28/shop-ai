@@ -39,10 +39,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, idx }) => {
           image: product.image,
         }),
       });
-      if (!res.ok) throw new Error('Failed to add to cart');
+      if (!res.ok) throw new Error('Failed to add to shopping list');
       Swal.fire({ title: 'Added!', text: 'Product added to cart.', icon: 'success', timer: 1200, showConfirmButton: false });
     } catch (err) {
-      Swal.fire({ title: 'Error', text: 'Could not add to cart.', icon: 'error' });
+      Swal.fire({ title: 'Error', text: 'Could not add to shopping list.', icon: 'error' });
     }
     setAdding(false);
   };
@@ -113,7 +113,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, idx }) => {
             disabled={adding}
             className="w-full cursor-pointer inline-block text-center bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {adding ? 'Adding...' : 'Add to Cart'}
+            {adding ? 'Adding...' : 'Add to shopping list'}
           </button>
         </div>
       </div>
