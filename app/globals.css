@@ -1,2 +1,5 @@
 @import "tailwindcss";
 
+body > div.min-h-screen.flex.flex-col > main > div > div > div.cl-rootBox.cl-signUp-root.🔒️.cl-internal-phfxlr > div > div.cl-footer.🔒️.cl-internal-nofrx8, body > div.min-h-screen.flex.flex-col > main > div > div > div.cl-rootBox.cl-signIn-root.🔒️.cl-internal-phfxlr > div > div.cl-footer.🔒️.cl-internal-nofrx8 {
+    display: none;
+}

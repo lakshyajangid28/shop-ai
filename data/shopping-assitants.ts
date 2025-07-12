@@ -4,39 +4,27 @@ export const shoppingAssistants: ShoppingAssistant[] = [
   {
     id: 'serenity',
     name: 'Serenity',
-    title: 'Wedding Shopping Expert',
-    category: 'Weddings',
+    title: 'Shopping Assistant',
+    category: 'Shopping',
     rating: 4.9,
     reviewCount: 234,
-    description: 'I help you find the perfect wedding essentials with elegance and attention to every detail.',
-    expertise: ['Wedding dresses', 'decorations', 'jewelry'],
+    description: 'I help you find the perfect products and deals for your needs with elegance and attention to every detail.',
+    expertise: ['Product search', 'shopping advice', 'recommendations'],
     voiceStyle: 'Warm, calming, professional',
     avatar: '/images/serenity-avatar.jpg'
   },
   {
-    id: 'sparkle',
-    name: 'Sparkle',
-    title: 'Party Shopping Guru',
-    category: 'Birthdays',
-    rating: 4.8,
-    reviewCount: 189,
-    description: 'I bring the fun to birthday shopping with creative gift ideas and party essentials.',
-    expertise: ['Party supplies', 'gifts', 'decorations'],
-    voiceStyle: 'Upbeat, enthusiastic, friendly',
-    avatar: '/images/sparkle-avatar.jpg'
-  },
-  {
     id: 'executive',
     name: 'Executive',
-    title: 'Corporate Shopping Pro',
-    category: 'Corporate',
+    title: 'Customer Support Assistant',
+    category: 'Support',
     rating: 4.9,
     reviewCount: 156,
-    description: 'I help you find professional corporate gifts and event supplies that make an impression.',
-    expertise: ['Corporate gifts', 'office supplies', 'event items'],
+    description: 'I help you with your orders, returns, and any customer support needs you have.',
+    expertise: ['Order help', 'returns', 'customer support'],
     voiceStyle: 'Authoritative, clear, confident',
     avatar: '/images/executive-avatar.jpg'
   }
 ];
 
-export const specialties = ['All Specialties', 'Weddings', 'Birthdays', 'Corporate'] as const;
+export const specialties = ['All Specialties', 'Shopping', 'Support'] as const;

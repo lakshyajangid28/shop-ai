@@ -1,30 +1,20 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ShoppingAssistant } from '@/types/shopping-assitants';
-import { Star, Brain, Mic } from 'lucide-react';
+import { Brain } from 'lucide-react';
 
 interface AssistantCardProps {
   assistant: ShoppingAssistant;
   onStartShopping: (assistantId: string) => void;
 }
 
-export const AssistantCard: React.FC<AssistantCardProps> = ({
-  assistant,
-  onStartShopping
-}) => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-
-  const handleVideoClick = () => {
-    setIsVideoPlaying(!isVideoPlaying);
-  };
+export const AssistantCard: React.FC<AssistantCardProps> = ({  assistant, onStartShopping }) => {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'Weddings':
-        return 'bg-purple-100 text-purple-800';
-      case 'Birthdays':
-        return 'bg-pink-100 text-pink-800';
-      case 'Corporate':
+      case 'Shopping':
+        return 'bg-green-100 text-green-800';
+      case 'Support':
         return 'bg-blue-100 text-blue-800';
       default:
         return 'bg-gray-100 text-gray-800';
@@ -32,7 +22,7 @@ export const AssistantCard: React.FC<AssistantCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 max-w-sm mx-auto">
+    <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 w-full max-w-lg mx-auto">
       {/* Header */}
       <div className="flex justify-center items-center mb-4">
         <div className="relative">
@@ -58,13 +48,6 @@ export const AssistantCard: React.FC<AssistantCardProps> = ({
         </span>
       </div>
 
-      {/* Rating */}
-      <div className="flex items-center justify-center mb-4">
-        <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 mr-1" />
-        <span className="font-semibold text-gray-900 mr-2">{assistant.rating}</span>
-        <span className="text-gray-600 text-sm">{assistant.reviewCount} reviews</span>
-      </div>
-
       {/* Description */}
       <p className="text-gray-600 text-center text-sm mb-6 leading-relaxed">
         {assistant.description}
@@ -79,15 +62,6 @@ export const AssistantCard: React.FC<AssistantCardProps> = ({
         <p className="text-sm text-gray-600 ml-6">
           {assistant.expertise.join(', ')}
         </p>
-      </div>
-
-      {/* Voice Style */}
-      <div className="mb-6">
-        <div className="flex items-center mb-2">
-          <Mic className="w-4 h-4 text-purple-600 mr-2" />
-          <span className="text-sm font-medium text-gray-700">Voice Style:</span>
-        </div>
-        <p className="text-sm text-gray-600 ml-6">{assistant.voiceStyle}</p>
       </div>
 
       {/* Action Buttons */}

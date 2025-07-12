@@ -25,6 +25,8 @@ interface AIMessageProps {
   idx: number;
 }
 
+const serenityAvatar = "/images/serenity-avatar.jpg";
+
 const AIMessage: React.FC<AIMessageProps> = ({ message, idx }) => {
   const isGreeting = message.intent === 'greeting';
   const isUnclear = message.intent === 'unclear' || message.requiresClarification;
@@ -88,10 +90,12 @@ const AIMessage: React.FC<AIMessageProps> = ({ message, idx }) => {
   return (
     <div className="flex items-start gap-4 mb-8 animate-in slide-in-from-left duration-500">
       {/* Avatar */}
-      <div
-        className={`flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-r ${config.gradient} flex items-center justify-center shadow-lg`}
-      >
-        <IconComponent className="w-6 h-6 text-white" />
+      <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center shadow-lg overflow-hidden">
+        <img
+          src={serenityAvatar}
+          alt="Serenity AI"
+          className="w-12 h-12 object-cover rounded-2xl"
+        />
       </div>
 
       {/* Message Content */}

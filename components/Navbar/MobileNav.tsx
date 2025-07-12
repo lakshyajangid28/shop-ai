@@ -1,8 +1,5 @@
 // components/Navbar/MobileNav.tsx
-'use client';
-
 import Link from 'next/link';
-import { useUser } from '@clerk/nextjs';
 import { ShoppingCart, User } from 'lucide-react';
 import NavLink from './NavLink';
 import navLinks from './navLinks';
@@ -13,7 +10,6 @@ interface Props {
 }
 
 const MobileNav = ({ isOpen, closeMenu }: Props) => {
-  const { isSignedIn } = useUser();
   return (
   <div
     className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
@@ -45,19 +41,16 @@ const MobileNav = ({ isOpen, closeMenu }: Props) => {
             onClick={closeMenu}
           >
             <User className="w-5 h-5" />
-            <span>{isSignedIn ? "Logout" : "Login"}</span>
+            <span>Profile</span>
           </Link>
 
           <Link
-            href="/cart"
+            href="/shopping-list"
             className="relative flex items-center space-x-2 p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300"
             onClick={closeMenu}
           >
             <ShoppingCart className="w-5 h-5" />
-            <span>Cart</span>
-            <span className="absolute -top-1 left-6 w-4 h-4 bg-purple-600 text-white text-xs rounded-full flex items-center justify-center">
-              3
-            </span>
+            <span>Shopping List</span>
           </Link>
         </div>
       </div>

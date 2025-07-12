@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
 
 export function usePopoutPortal({ title = '', width = 600, height = 800 } = {}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -30,13 +29,12 @@ export function usePopoutPortal({ title = '', width = 600, height = 800 } = {}) 
     windowRef.current.document.body.innerHTML = '<div id="popout-root"></div>';
     containerRef.current = windowRef.current.document.getElementById('popout-root') as HTMLDivElement;
 
-    // Inject Tailwind CSS from the main app into the new window
     const links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
     links.forEach(link => {
       const newLink = link.cloneNode(true) as HTMLLinkElement;
       windowRef.current!.document.head.appendChild(newLink);
     });
-    // Also copy <style> tags (for inline styles, e.g. Next.js)
+
     const styles = Array.from(document.querySelectorAll('style'));
     styles.forEach(style => {
       const newStyle = style.cloneNode(true) as HTMLStyleElement;

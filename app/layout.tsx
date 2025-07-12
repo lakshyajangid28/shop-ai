@@ -24,15 +24,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased`}>
+        <ClerkProvider>
         <div className="min-h-screen flex flex-col">
-          <ClerkProvider>
             <Navbar />
             <main className="flex-grow">
               {children}
             </main>
             <Footer />
-          </ClerkProvider>
         </div>
+        </ClerkProvider>
       </body>
     </html>
   );
