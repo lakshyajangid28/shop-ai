@@ -16,6 +16,7 @@ const ProductRecommendations = ({
   query,
   loading,
 }: ProductRecommendationsProps) => {
+  console.log(products);
   if (loading) {
     return (
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 text-center text-lg text-gray-600">
@@ -47,10 +48,10 @@ const ProductRecommendations = ({
       {products.map((product: any, idx: number) => {
         const normalizedProduct = {
           image: product.image || "", // optional if backend includes image
-          title: product.product_title,
-          price: product.product_price,
+          title: product.title,
+          price: product.price,
           rating: product.rating || "", // optional
-          link: `https://www.amazon.com/dp/${product.asin}`, // optional direct link
+          link: product.link, // optional direct link
           rank: idx + 1,
         };
 
