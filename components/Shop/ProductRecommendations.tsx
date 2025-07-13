@@ -29,8 +29,8 @@ const ProductRecommendations = ({ isSignedIn, shoppingList, products, query, loa
 
   return (
     <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 text-center text-lg text-gray-600 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {products.map((product: any) => (
-        <ProductCard idx={product.id} product={product} />
+      {products.map((product: any, idx: any) => (
+        <ProductCard key={idx} idx={product.id} product={product} />
       ))}
     </div>
   );

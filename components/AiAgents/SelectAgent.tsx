@@ -26,7 +26,7 @@ const SelectAgent: React.FC = () => {
         if (assistantId === 'serenity') {
             const assistant = shoppingAssistants.find(a => a.id === 'serenity');
             setSelectedAssistant(assistant);
-        } else if (assistantId === 'executive') {
+        } else if (assistantId === 'sparkle') {
             router.push('/customer-support');
         }
     };

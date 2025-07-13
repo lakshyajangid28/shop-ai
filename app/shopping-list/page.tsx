@@ -11,7 +11,7 @@ export default function Cart() {
     const router = useRouter();
     const [items, setItems] = useState<ShoppingListItem[]>([]);
     const [loading, setLoading] = useState(true);
-
+    console.log(items);
     // Fetch cart items
     useEffect(() => {
         if (isLoaded && isSignedIn && user) {

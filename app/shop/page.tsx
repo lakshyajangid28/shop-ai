@@ -13,17 +13,17 @@ const ShopPage = () => {
   const [products, setProducts] = useState<any[]>([]);
   const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-
   const searchProducts = (query: string) => {
     setLoading(true);
 
     // Simulate an API call to fetch products based on the query
     const productBasedOnQuery = async () => {
       try {
-        const res = await fetch(`${backend_url}/products?query=${query}`);
+        const res = await fetch(`${backend_url}/search-products?query=${query}`);
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
-        setProducts(data);
+        console.log("Fetched products:", data);
+        // setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
         setProducts([]);
@@ -35,43 +35,51 @@ const ShopPage = () => {
   }
 
   useEffect(() => {
-    if (shoppingList.length > 0 && products.length === 0 && query === "") {
+    const loadData = async () => {
       setLoading(true);
-      console.log("Fetching products based on shopping list...");
 
-      // Simulate fetching products based on the shopping list
-      const fetchProductsBasedOnShoppingList = async () => {
+      if (isLoaded && isSignedIn && user) {
         try {
-          const res = await fetch(`${backend_url}/products?shoppingList=${JSON.stringify(shoppingList)}`);
-          if (!res.ok) throw new Error("Failed to fetch products");
-          const data = await res.json();
-          setProducts(data);
-        } catch (error) {
-          console.error("Error fetching products:", error);
-          setProducts([]);
-        }
-      };
-      fetchProductsBasedOnShoppingList(); 
-
-      setLoading(false);
-    }
-  }, [shoppingList]);
-
-  useEffect(() => {
-    if (isLoaded && isSignedIn && user) {
-      const fetchShoppingList = async () => {
-        try {
+          // 1. Fetch shopping list
           const res = await fetch(`/api/cart?userId=${user.id}`);
           if (!res.ok) throw new Error("Failed to fetch shopping list");
-          const data = await res.json();
-          setShoppingList(data.slice(0, 10));
-        } catch (error) {
-          console.error("Error fetching shopping list:", error);
-        }
-      };
+          const shoppingListData = await res.json();
 
-      fetchShoppingList();
-    }
+          setShoppingList(shoppingListData);
+
+          // 2. If shopping list exists, fetch products
+          if (shoppingListData.length > 0) {
+
+            const transcript = `Based on the following shopping list, recommend similar products that the user might be interested in:\n\n` +
+              shoppingList.map((item, index) =>
+                `${index + 1}. "${item.title}" – Price: ${item.price}`
+              ).join('\n') +
+              `\n\nPlease provide product suggestions that align with the style, purpose, or category of these items.`;
+
+            const productRes = await fetch(`${backend_url}/shop-products`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                transcript: transcript,
+                messageHistory: [],
+              }),
+            });
+            if (!productRes.ok) throw new Error("Failed to fetch products");
+            const productData = await productRes.json();
+            setProducts(productData.data);
+          } else {
+            setProducts([]);
+          }
+        } catch (error) {
+          console.error("Error loading data:", error);
+          setProducts([]);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadData();
   }, [user, isLoaded, isSignedIn]);
 
   return (
