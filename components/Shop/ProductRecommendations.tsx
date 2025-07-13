@@ -1,16 +1,31 @@
 import React from "react";
 import ProductCard from "../ChatBox/ChatProductCard";
 
-const ProductRecommendations = ({ isSignedIn, shoppingList, products, query, loading }: any) => {
+interface ProductRecommendationsProps {
+  isSignedIn?: boolean; // Made optional with ?
+  shoppingList: any[];
+  products: any[];
+  query: string;
+  loading: boolean;
+}
 
+const ProductRecommendations = ({
+  isSignedIn = false, // Default value if undefined
+  shoppingList,
+  products,
+  query,
+  loading,
+}: ProductRecommendationsProps) => {
   if (loading) {
     return (
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 text-center text-lg text-gray-600">
-        <span className="text-purple-600 font-semibold animate-pulse">Loading recommendations...</span>
+        <span className="text-purple-600 font-semibold animate-pulse">
+          Loading recommendations...
+        </span>
       </div>
     );
   }
-  
+
   if (!isSignedIn || (shoppingList.length === 0 && !query)) {
     return (
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 text-center text-lg text-gray-600">
@@ -29,9 +44,24 @@ const ProductRecommendations = ({ isSignedIn, shoppingList, products, query, loa
 
   return (
     <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-8 text-center text-lg text-gray-600 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {products.map((product: any, idx: any) => (
-        <ProductCard key={idx} idx={product.id} product={product} />
-      ))}
+      {products.map((product: any, idx: number) => {
+        const normalizedProduct = {
+          image: product.image || "", // optional if backend includes image
+          title: product.product_title,
+          price: product.product_price,
+          rating: product.rating || "", // optional
+          link: `https://www.amazon.com/dp/${product.asin}`, // optional direct link
+          rank: idx + 1,
+        };
+
+        return (
+          <ProductCard
+            key={product.asin || idx}
+            idx={idx}
+            product={normalizedProduct}
+          />
+        );
+      })}
     </div>
   );
 };
